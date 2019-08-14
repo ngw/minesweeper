@@ -1,0 +1,78 @@
+Problems:
+  - some specs fails from time to time due to rounding errors when calculating the number of visible tiles: multiple runs will solve the problem
+  - I had to duplicate some code in board_spec.rb to keep the private methods private
+  - I didn't find a way to remove the caller from pry output when calling binding.pry
+
+
+EXAMPLE USAGE:
+
+$~ exe/minesweeper --width 10 --height 24 --difficulty easy
+[1] pry(#<Minesweeper::Game>)> display
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXX3XXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXX3XXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXX0
+XXXXXXXXXX
+XXXXXXXXXX
+=> nil
+[2] pry(#<Minesweeper::Game>)> attempt(100,100)
+StandardError: Invalid coordinates
+from /home/ngw/Projects/minesweeper/lib/minesweeper/game.rb:52:in `validate_coords'
+[3] pry(#<Minesweeper::Game>)> attempt(2,3)
+=> true
+[4] pry(#<Minesweeper::Game>)> attempt(2,4)
+=> true
+[5] pry(#<Minesweeper::Game>)> attempt(2,5)
+=> true
+[6] pry(#<Minesweeper::Game>)> attempt(2,6)
+=> true
+[7] pry(#<Minesweeper::Game>)> attempt(2,7)
+=> true
+[8] pry(#<Minesweeper::Game>)> attempt(2,8)
+BOOM!!!
+=> nil
+[9] pry(#<Minesweeper::Game>)> display
+22101*3**2
+**1023*6*3
+34322*4**2
+*3**32*431
+13**212*10
+0123211110
+1111*21111
+2*1123*11*
+*3313*3222
+2*2*3*21*2
+112121124*
+00000112**
+000001*332
+2221123*21
+**3*33*32*
+223*3**211
+1222333211
+*3*32*23*2
+35*4*4*3*2
+**4*3*2211
+**42311000
+344*222100
+1**22**111
+122112211*
+=> nil
+
